@@ -1,0 +1,96 @@
+data:
+  Normal_Method: Standard
+  X_list:
+  - 12
+  - 11
+  - 10
+  - 9
+  - 8
+  - 7
+  - 6
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  Y_list:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  _len:
+  - 672
+  - 672
+  batch_size: 64
+  dataset: nogrid
+device: 0
+loss:
+  alfa: 0.001
+  name: rmse_lasso
+model:
+  Dynamic:
+    eigen_dim_origin: 16
+    eigen_dim_time: 16
+    hidden_dim: 64
+    horizon: 12
+    input_dim: 2
+  GMSDR:
+    cl_decay_steps: 300
+    hidden_size: 64
+    input_dim: 2
+    k_hop: 3
+    lens: 12
+    n_dim: 50
+    n_gconv_layers: 3
+    n_rnn_layers: 1
+    n_supports: 1
+    num_nodes: 266
+    output_dim: 2
+    pre_k: 3
+    pre_v: 2
+  name: GMSDR
+name: GMSDR
+optimizer:
+  Adam:
+    amsgrad: true
+    eps: 0.001
+    lr: 0.0015
+    weight_decay: 0.0005
+  RMSprop:
+    lr: 0.01
+    weight_decay: 0.001
+  name: Adam
+preprocess:
+  hidden_size: 20
+  normalized_category: randomwalk
+scheduler:
+  MultiStepLR:
+    gamma: 0.1
+    milestones:
+    - 1
+    - 5
+    - 10
+    - 15
+    - 20
+  ReduceLROnPlateau:
+    factor: 0.2
+    min_lr: 1.0e-06
+    patience: 5
+    threshold: 0.001
+  StepLR:
+    gamma: 0.1
+    step_size: 10
+  name: ReduceLROnPlateau
+tag: train_taxi
+train:
+  early_stop_steps: 30
+  epochs: 1000
+  max_grad_norm: 5
